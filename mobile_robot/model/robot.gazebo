@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot>
+<!-- http://classic.gazebosim.org/tutorials?tut=ros_urdf&cat=connect_ros -->
+<gazebo reference="body_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="wheel1_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="wheel2_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="wheel3_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="wheel4_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <!--Gazebo Sim DiffDrive controller (Jazzy) -->
+  <gazebo>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+      <left_joint>wheel4_joint</left_joint>
+      <left_joint>wheel2_joint</left_joint>
+      <right_joint>wheel3_joint</right_joint>
+      <right_joint>wheel1_joint</right_joint>
+      <wheel_separation>${body_link_y_dim + wheel_link_length}</wheel_separation>
+      <wheel_radius>${wheel_link_radius}</wheel_radius>
+      <topic>cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+    </plugin>
+  </gazebo>
+
+</robot>

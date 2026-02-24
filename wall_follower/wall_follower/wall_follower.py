@@ -92,11 +92,11 @@ class WallFollower(Node):
         return None
 
     # define and initialize class variables
-    # I changed this to match my robot size
-    robot_radius = 0.35                      # 35 cm
-    side_threshold_min = robot_radius + 0.10 # 45 cm
-    side_threshold_max = robot_radius + 0.20 # 55 cm
-    front_threshold = robot_radius + 0.90    # 125 cm
+    
+    robot_radius = 0.35
+    side_threshold_min = 1.00 
+    side_threshold_max = 1.20 
+    front_threshold = 1.60    
     pi = 3.141592654
     pi_inv = 0.318309886
     ignore_iterations = 5

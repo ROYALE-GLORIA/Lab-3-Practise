@@ -12,11 +12,11 @@ def generate_launch_description():
     robotXacroName = 'differential_drive_robot'
     namePackage = 'mobile_robot'
     modelFileRelativePath = 'model/robot.xacro'
-    worldFileRelativePath = 'worlds/empty_world.world'
+    worldFileRelativePath = 'worlds/empty.sdf'
     pathModelFile = os.path.join(get_package_share_directory(
         namePackage), modelFileRelativePath)
     pathWorldFile = os.path.join(get_package_share_directory(
-        namePackage), worldFileRelativePath)
+        namePackage), 'worlds/wall_world.sdf')
     robotDescription = xacro.process_file(pathModelFile).toxml()
     gazebo_rosPackageLaunch = PythonLaunchDescriptionSource(os.path.join(
         get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'))
@@ -48,6 +48,13 @@ def generate_launch_description():
         output='screen'
     )
 
+    bridgeScan = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan'],
+        output='screen'
+    )
+
     # create an empty launch description object
     launchDescriptionObject = LaunchDescription()
     launchDescriptionObject.add_action(gazeboLaunch)
@@ -55,4 +62,5 @@ def generate_launch_description():
     launchDescriptionObject.add_action(nodeRobotStatePublisher)
     launchDescriptionObject.add_action(bridgeCmdVel)
     launchDescriptionObject.add_action(bridgeOdom)
+    launchDescriptionObject.add_action(bridgeScan)
     return launchDescriptionObject

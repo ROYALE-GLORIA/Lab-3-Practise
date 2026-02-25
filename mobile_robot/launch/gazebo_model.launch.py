@@ -55,7 +55,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    # create an empty launch description object
     launchDescriptionObject = LaunchDescription()
     launchDescriptionObject.add_action(gazeboLaunch)
     launchDescriptionObject.add_action(spawnModelNode)
